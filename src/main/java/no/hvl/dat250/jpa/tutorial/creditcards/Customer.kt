@@ -1,26 +1,31 @@
-package no.hvl.dat250.jpa.tutorial.creditcards;
+package no.hvl.dat250.jpa.tutorial.creditcards
 
-import java.util.Collection;
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
 @Entity
-public class Customer {
+data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    val id: Long? = null,
 
-    public String getName() {
-        // TODO: implement method!
-        return null;
+    @ManyToMany
+    @JoinTable(
+        name = "customer_address",
+        joinColumns = [JoinColumn(name = "customer_id")],
+        inverseJoinColumns = [JoinColumn(name = "address_id")]
+    )
+    var addresses: Collection<Address> = emptyList(),
+
+    @OneToMany(mappedBy = "customer")
+    var creditCards: Collection<CreditCard> = emptyList(),
+
+    val name: String = ""
+) {
+    override fun toString(): String {
+        return "Customer(id=$id, name=$name)"
     }
 
-    public Collection<Address> getAddresses() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Collection<CreditCard> getCreditCards() {
-        // TODO: implement method!
-        return null;
+    override fun hashCode(): Int {
+        return id.hashCode()
     }
 }

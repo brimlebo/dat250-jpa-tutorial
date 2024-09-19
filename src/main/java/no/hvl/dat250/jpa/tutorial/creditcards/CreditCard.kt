@@ -1,36 +1,35 @@
-package no.hvl.dat250.jpa.tutorial.creditcards;
+package no.hvl.dat250.jpa.tutorial.creditcards
 
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
 @Entity
-public class CreditCard {
-
+data class CreditCard(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    val id: Long? = null,
 
-    public Integer getNumber() {
-        // TODO: implement method!
-        return null;
+    @ManyToOne
+    @JoinColumn(name = "pincode_id")
+    val pincode: Pincode = Pincode(),
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    var customer: Customer? = null,
+
+    @ManyToOne
+    val owningBank: Bank = Bank(),
+
+    val number: Int = 0,
+
+    val balance: Int = 0,
+
+    val creditLimit: Int = 0
+) {
+    override fun toString(): String {
+        return "CreditCard(id=$id, pincode=$pincode, customer=$customer, owningBank=$owningBank, number=$number, balance=$balance, creditLimit=$creditLimit)"
     }
 
-    public Integer getBalance() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Integer getCreditLimit() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Pincode getPincode() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Bank getOwningBank() {
-        // TODO: implement method!
-        return null;
+    override fun hashCode(): Int {
+        return id.hashCode()
     }
 }

@@ -1,26 +1,25 @@
-package no.hvl.dat250.jpa.tutorial.creditcards;
+package no.hvl.dat250.jpa.tutorial.creditcards
 
-import java.util.Collection;
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
 @Entity
-public class Address {
+data class Address(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    val id: Long? = null,
 
-    public String getStreet() {
-        // TODO: implement method!
-        return null;
+    @ManyToMany(mappedBy = "addresses")
+    var owners: Set<Customer> = emptySet(),
+
+    val street: String = "",
+
+    val number: Int = 0
+) {
+    override fun toString(): String {
+        return "Address(id=$id, street=$street, number=$number)"
     }
 
-    public Integer getNumber() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Collection<Customer> getOwners() {
-        // TODO: implement method!
-        return null;
+    override fun hashCode(): Int {
+        return id.hashCode()
     }
 }

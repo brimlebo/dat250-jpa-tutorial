@@ -1,6 +1,6 @@
 # DAT250 Experiment Assignment 4 - report
 
-[Code for the experiment](src/main/java/no/hvl/dat250/jpa/tutorial/creditcards) <br>
+[Code for the experiment](../src/main/java/no/hvl/dat250/jpa/tutorial/creditcards) <br>
 
 The assignment went fairly well, and I only had a few issues to iron out.
 
